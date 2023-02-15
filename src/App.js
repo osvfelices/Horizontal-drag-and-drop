@@ -2,13 +2,11 @@ import React, { useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd"; 
 
 function App() {
-  const listItems = [ 
-    { id: "1", label: "Channel One" },
-    { id: "2", label: "Channel Two" },
-    { id: "3", label: "Channel Three" },
-    { id: "4", label: "Channel Four" },
-    { id: "5", label: "Channel Five" },
-  ];
+
+const listItems = [];
+for (let i = 1; i <= 10; i++) {
+  listItems.push({ id: i.toString(), label: `Channel ${i}` });
+}
   const [dragDropList, setDragDropList] = useState(listItems);
 
   const onDragComplete = (result) => {
