@@ -28,29 +28,21 @@ for (let i = 1; i <= 10; i++) {
         <DragDropContext onDragEnd={onDragComplete}>
           <Droppable droppableId="drag-drop-list" direction="horizontal">
             {(provided) => (
-              <div
-                className="drag-drop-list-container"
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-              >
-                {dragDropList.map((item, index) => (
-                  <Draggable
-                    key={item.id}
-                    draggableId={item.label}
-                    index={index}
-                  >
-                    {(provided) => (
-                      <div
-                        className="item-card"
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                      >
-                        <p className="label">{item.label}</p>
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
+              <div {...provided.droppableProps} ref={provided.innerRef} className="drag-drop-list-container">
+                {dragDropList.map((item, index) => {
+                  const {id, label} = item;
+                  return (
+                    <div key={id}>
+                      <Draggable draggableId={label} index={index}>
+                        {(provided) => (
+                          <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} className="item-card">
+                            <p className="label">{label}</p>
+                          </div>
+                        )}
+                      </Draggable>
+                    </div>
+                  );
+                })}
                 {provided.placeholder}
               </div>
             )}
